@@ -49,7 +49,7 @@ public class TelephoneLines implements Solution<Integer> {
      */
     @Override
     public Integer solve(Graph g, Integer... values) {
-        return solution_1(g, values);
+        return solution_1((Graph_AdjacentList_Arrays) g, values);
     }
 
     /**
