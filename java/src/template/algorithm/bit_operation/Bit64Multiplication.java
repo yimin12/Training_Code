@@ -23,7 +23,7 @@ package src.template.algorithm.bit_operation;
  * 2
  */
 
-public interface Bit64Multiplication {
+public class Bit64Multiplication {
 
     /* Follow up of FastExponentiation */
 
