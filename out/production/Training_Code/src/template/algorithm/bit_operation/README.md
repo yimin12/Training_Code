@@ -172,7 +172,7 @@ Here is the raw markdown:
 
 ---
 
-通过这些位运算符和补码的概念，可以更高效地处理二进制数据和，在计算机竞赛中，比较常见补码的计算方式为 `~x + 1`,因此 `-x = ~x + 1`.
+通过这些位运算符和补码的概念，可以更高效地处理二进制数据和，在计算机竞赛中，比较常见补码的计算方式为 `~x + 1`,因此当x大于0时 `-x = ~x + 1`.
 巧妙地将减法操作或者负数项变成了计算机擅长的取反操作和加法操作。
 
 ---
@@ -239,6 +239,7 @@ Here is the raw markdown:
 
 ---
 ## 题目知识点地图
-1. `快速幂` or `"Fast Exponentiation"` -> reducing the time complexity of exponentiation from  O(n) to O(log n).
-
+1. `快速幂` or `"Fast Exponentiation"` -> reducing the time complexity of exponentiation from  O(n) to O(log n).\
+- **Follow Up**
+- `Bit64Multiplication`
 

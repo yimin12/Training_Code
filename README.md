@@ -1,2 +1,4 @@
 # Training_Code
-CodingPad
+
+`Map Sequence`
+1. `Bit Operation` -> template.algorithm.bit_operation
