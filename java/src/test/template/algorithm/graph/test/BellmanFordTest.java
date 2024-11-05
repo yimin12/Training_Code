@@ -1,4 +1,4 @@
-package src.test.template.algorithm.graph.impl;
+package src.test.template.algorithm.graph.test;
 
 import org.junit.Before;
 import org.junit.Test;

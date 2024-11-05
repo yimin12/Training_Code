@@ -1,4 +1,4 @@
-package src.test.template.algorithm.bit_operation.impl;
+package src.test.template.algorithm.bit_operation.test;
 
 import org.junit.Before;
 import org.junit.Test;

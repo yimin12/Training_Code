@@ -1,11 +1,10 @@
-package src.test.template.algorithm.bit_operation.impl;
+package src.test.template.algorithm.bit_operation.test;
 
 import org.junit.Before;
 import org.junit.Test;
 import src.template.algorithm.bit_operation.UniqueCharacters;
 
 import static org.junit.Assert.*;
-import java.util.HashSet;
 
 public class UniqueCharactersTest {
 
