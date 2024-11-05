@@ -35,11 +35,14 @@ public class StacksSort<T extends Comparable<T>> {
             s2.offerFirst(s1.pollFirst());
         }
 
+        // half in s1, and half in s2, both shuffle s3 with its corresponding length
         sort(s2, s3, s1, mid1);
         sort(s1, s3, s2, mid2);
 
         int i = 0, j = 0;
         while (i < mid1 && j < mid2) {
+            assert s2.peekFirst() != null;
+            assert s1.peekFirst() != null;
             if (s2.peekFirst().compareTo(s1.peekFirst()) < 0) {
                 s3.offerFirst(s2.pollFirst());
                 i ++;
