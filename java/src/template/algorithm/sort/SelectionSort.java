@@ -4,7 +4,11 @@ public class SelectionSort extends Sort {
 
     Comparable[] comparables;
 
+    public SelectionSort() {
+    }
+
     public SelectionSort(Comparable[] comparables) {
+        this();
         this.comparables = comparables;
     }
 

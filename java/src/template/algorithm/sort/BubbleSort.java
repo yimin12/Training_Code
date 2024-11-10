@@ -10,7 +10,10 @@ public class BubbleSort extends Sort {
 
     Comparable[] comparables;
 
+    public BubbleSort() {}
+
     public BubbleSort(Comparable[] comparables) {
+        this();
         this.comparables = comparables;
     }
 

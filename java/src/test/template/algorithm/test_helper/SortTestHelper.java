@@ -68,14 +68,14 @@ public class SortTestHelper {
      */
     public static void testSort(String sortClassName, Comparable[] arr) {
         try {
-            Class sortClass = Class.forName(sortClassName);
-            Method sortMethod = sortClass.getMethod("sort", new Class[]{Comparable[].class});
-            Object[] params = new Object[]{arr};
+            Class<?> sortClass = Class.forName(sortClassName);
+            Object sortInstance = sortClass.getDeclaredConstructor().newInstance(); // Create an instance of the class
+            Method sortMethod = sortClass.getMethod("sort", Comparable[].class);
             long startTime = System.currentTimeMillis();
-            sortMethod.invoke(sortClass, params);
+            sortMethod.invoke(sortInstance, (Object) arr); // Invoke method on the instance
             long endTime = System.currentTimeMillis();
             assert isSorted(arr);
-            System.out.println(sortClass.getSimpleName()+ " : " + (endTime-startTime) + "ms");
+            System.out.println(sortClass.getSimpleName() + " : " + (endTime - startTime) + "ms");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -89,11 +89,11 @@ public class SortTestHelper {
      */
     public static long testSort_return(String sortClassName, Comparable[] arr) {
         try {
-            Class sortClass = Class.forName(sortClassName);
-            Method sortMethod = sortClass.getMethod("sort", new Class[]{Object[].class});
-            Object[] params = new Object[]{arr};
+            Class<?> sortClass = Class.forName(sortClassName);
+            Object sortInstance = sortClass.getDeclaredConstructor().newInstance(); // Create an instance of the class
+            Method sortMethod = sortClass.getMethod("sort", Comparable[].class);
             long startTime = System.currentTimeMillis();
-            sortMethod.invoke(sortClass, params);
+            sortMethod.invoke(sortInstance, (Object) arr); // Invoke method on the instance
             long endTime = System.currentTimeMillis();
             assert isSorted(arr);
             return endTime - startTime;

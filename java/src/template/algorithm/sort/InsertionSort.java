@@ -9,7 +9,11 @@ public class InsertionSort extends Sort{
 
     private Comparable[] comparables;
 
+    public InsertionSort() {
+    }
+
     public InsertionSort(Comparable[] comparables) {
+        this();
         this.comparables = comparables;
     }
 

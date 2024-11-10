@@ -11,6 +11,10 @@ import java.util.Arrays;
  *  已知在近乎有序的数组中，插入排序的时间复杂度接近与 O(n)，而归并排序稳定在 O(nlogn) 所以我们可以在一般归并排序的基础之上实施优化
  *  1。对于已知有序数组，无需继续 进入递归
  *  2. 数据量小，或者接近有序时时使用 插入排序
+ *
+ * Implementation:
+ *  1. Top down -> Recursively merge
+ *  2. Bottom up -> Iterative merge (Avoiding stack
  */
 
 public class MergeSort extends Sort{
@@ -19,7 +23,11 @@ public class MergeSort extends Sort{
     // 本质上是 n^2 和 n 的常数项比较，当归并元素小于10个时，使用插入排序，具体优化程度更实际用例有关
     public static Integer EXPERIMENT_VALUE = 10;
 
+    public MergeSort() {
+    }
+
     public MergeSort(Comparable[] comparables) {
+        this();
         this.comparables = comparables;
     }
 
@@ -27,15 +35,17 @@ public class MergeSort extends Sort{
         if (comparables == null || left < 0 || right < 0 || left >= comparables.length || right >= comparables.length)
             return;
         Comparable[] aux = new Comparable[comparables.length];
-//        merge_sort(comparables, aux, left, right);
-        merge_sort_optimized(comparables, aux, left, right);
-   }
+//        merge_sort_top_down(comparables, aux, left, right);
+//        merge_sort_optimized(comparables, aux, left, right);
+//        merge_sort_bottom_up(comparables, aux, left, right);
+       merge_sort_bottom_up_optimized(comparables, aux, left, right);
+    }
 
-   private static void merge_sort(Comparable[] comparables, Comparable[] aux, int left, int right) {
+   private static void merge_sort_top_down(Comparable[] comparables, Comparable[] aux, int left, int right) {
         if (left >= right) return;
         int mid = left + ((right - left) >> 1);
-        merge_sort(comparables, aux, left, mid);
-        merge_sort(comparables, aux, mid + 1, right);
+        merge_sort_top_down(comparables, aux, left, mid);
+        merge_sort_top_down(comparables, aux, mid + 1, right);
         merge(comparables, aux, left, mid, right);
    }
 
@@ -51,6 +61,34 @@ public class MergeSort extends Sort{
         merge_sort_optimized(comparables, aux, mid + 1, right);
         // Optimized 2
         if (comparables[mid].compareTo(comparables[mid + 1]) > 0) merge(comparables, aux, left, mid, right);
+   }
+
+   private static void merge_sort_bottom_up(Comparable[] comparables, Comparable[] aux, int left, int right) {
+        int n = right - left + 1;
+        for (int size = 1 ; size < n; size *= 2) {
+            for (int i = left; i <= right - size ; i += (size * 2)) {
+               // 对 arr[i...i+sz-1] 和 arr[i+sz...i+2*sz-1] 进行归并
+               int mid = i + size - 1;
+               int end = Math.min(i + size * 2 - 1, right);
+               merge(comparables, aux, i, mid, end);
+            }
+        }
+   }
+
+   private static void merge_sort_bottom_up_optimized(Comparable[] comparables, Comparable[] aux, int left, int right) {
+        int n = right - left + 1;
+        for (int i = left; i < n; i += EXPERIMENT_VALUE) {
+            InsertionSort.sort(comparables, i, Math.min(i + EXPERIMENT_VALUE, right - 1));
+        }
+        for (int size = 1 ; size < n; size *= 2) {
+            for (int i = left; i <= right - size ; i += (size * 2)) {
+                int mid = i + size - 1;
+                int end = Math.min(i + size * 2 - 1, right);
+                if (comparables[mid].compareTo(comparables[mid + 1]) > 0) {
+                    merge(comparables, aux, i, mid, end);
+                }
+            }
+        }
    }
 
    private static void merge(Comparable[] comparables, Comparable[] aux, int left, int mid, int right) {

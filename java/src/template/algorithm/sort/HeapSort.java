@@ -18,7 +18,10 @@ public class HeapSort extends Sort{
 
     Comparable[] comparables;
 
+    public HeapSort() {}
+
     public HeapSort(Comparable[] comparables) {
+        this();
         this.comparables = comparables;
     }
 
