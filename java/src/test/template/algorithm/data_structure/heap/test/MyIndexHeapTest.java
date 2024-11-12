@@ -2,7 +2,7 @@ package src.test.template.algorithm.data_structure.heap.test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.template.algorithm.data_structure.heap.MyIndexHeap;
+import src.template.algorithm.data_structure.heap.impl.MyIndexHeap;
 
 import static org.junit.Assert.*;
 

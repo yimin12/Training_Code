@@ -1,5 +1,7 @@
 package src.template.algorithm.graph.data_structure;
 
+import src.template.algorithm.graph.interfaces.Graph;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

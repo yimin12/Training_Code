@@ -1,7 +1,7 @@
 package src.template.algorithm.graph.impl;
 
 import src.template.algorithm.graph.interfaces.SSSP;
-import src.template.algorithm.graph.data_structure.Graph;
+import src.template.algorithm.graph.interfaces.Graph;
 import src.template.algorithm.graph.data_structure.Graph_AdjacentList_Arrays;
 
 import java.util.ArrayDeque;

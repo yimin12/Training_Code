@@ -1,5 +1,7 @@
 package src.template.algorithm.data_structure.hash;
 
+import src.template.algorithm.data_structure.heap.interfaces.MyHeap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +11,7 @@ import java.util.List;
  *    0 start index - related the parent(), leftChild(), rightChild()
  * @param <T>
  */
-public class MyHashHeap<T extends Comparable<T>>{
+public class MyHashHeap<T extends Comparable<T>> implements MyHeap<T> {
 
     List<T> heap;
     String mode;
@@ -33,6 +35,16 @@ public class MyHashHeap<T extends Comparable<T>>{
 
     public boolean isEmpty() {
         return size_t == 0;
+    }
+
+    @Override
+    public void offer(T element) {
+        add(element);
+    }
+
+    @Override
+    public T peek() {
+        return heap.getFirst();
     }
 
     private int parent(Integer index) {

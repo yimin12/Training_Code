@@ -1,7 +1,7 @@
 package src.contest.graph;
 
 import src.template.Solution;
-import src.template.algorithm.graph.data_structure.Graph;
+import src.template.algorithm.graph.interfaces.Graph;
 import src.template.algorithm.graph.data_structure.Graph_AdjacentList_Arrays;
 
 import java.util.PriorityQueue;

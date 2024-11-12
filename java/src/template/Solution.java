@@ -1,6 +1,6 @@
 package src.template;
 
-import src.template.algorithm.graph.data_structure.Graph;
+import src.template.algorithm.graph.interfaces.Graph;
 
 public interface Solution<T> {
 
