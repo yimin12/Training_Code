@@ -57,7 +57,7 @@ public class HeapSort extends Sort {
     }
 
     @Override
-    void sort(Comparable[] comparables) {
+    public void sort(Comparable[] comparables) {
         HeapSort.sort(comparables, 0, comparables.length - 1);
     }
 }

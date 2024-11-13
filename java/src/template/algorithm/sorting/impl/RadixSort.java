@@ -103,7 +103,7 @@ public class RadixSort extends Sort {
     }
 
     @Override
-    void sort(Comparable[] comparables) {
+    public void sort(Comparable[] comparables) {
         if (comparables == null || comparables.length == 0) return;
         RadixSort.radixSort(comparables);
     }

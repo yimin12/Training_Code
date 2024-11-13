@@ -36,7 +36,7 @@ public class HillSort extends Sort {
     }
 
     @Override
-    void sort(Comparable[] comparables) {
+    public void sort(Comparable[] comparables) {
         if (comparables == null || comparables.length == 0) return;
         HillSort.hillSort(comparables);
     }

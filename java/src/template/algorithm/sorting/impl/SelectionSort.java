@@ -28,7 +28,7 @@ public class SelectionSort extends Sort {
     }
 
     @Override
-    void sort(Comparable[] comparables) {
+    public void sort(Comparable[] comparables) {
         SelectionSort.sort(comparables, 0, comparables.length - 1);
     }
 }

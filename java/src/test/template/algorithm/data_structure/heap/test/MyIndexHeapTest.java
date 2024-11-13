@@ -2,19 +2,19 @@ package src.test.template.algorithm.data_structure.heap.test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.template.algorithm.data_structure.heap.impl.MyIndexHeap;
+import src.template.algorithm.data_structure.heap.impl.IndexHeap;
 
 import static org.junit.Assert.*;
 
 public class MyIndexHeapTest {
 
-    private MyIndexHeap<Integer> maxHeap;
-    private MyIndexHeap<Integer> minHeap;
+    private IndexHeap<Integer> maxHeap;
+    private IndexHeap<Integer> minHeap;
 
     @Before
     public void setUp() {
-        maxHeap = new MyIndexHeap<>("max", 10);
-        minHeap = new MyIndexHeap<>("min", 10);
+        maxHeap = new IndexHeap<>("max", 10);
+        minHeap = new IndexHeap<>("min", 10);
     }
 
     @Test

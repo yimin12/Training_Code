@@ -2,19 +2,19 @@ package src.test.template.algorithm.data_structure.hash.test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.template.algorithm.data_structure.hash.MyHashHeap;
+import src.template.algorithm.data_structure.hash.HashHeap;
 
 import static org.junit.Assert.*;
 
 public class MyHashHeapTest {
 
-    private MyHashHeap<Integer> minHeap;
-    private MyHashHeap<Integer> maxHeap;
+    private HashHeap<Integer> minHeap;
+    private HashHeap<Integer> maxHeap;
 
     @Before
     public void setUp() {
-        minHeap = new MyHashHeap<>("min");
-        maxHeap = new MyHashHeap<>("max");
+        minHeap = new HashHeap<>("min");
+        maxHeap = new HashHeap<>("max");
     }
 
     @Test

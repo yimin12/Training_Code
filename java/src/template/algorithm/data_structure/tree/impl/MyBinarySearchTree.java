@@ -37,7 +37,7 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
             return new TreeNode<>(key, value);
         }
         if (key.compareTo(node.getKey()) == 0) {
-            node.value = value;
+            node.setValue(value);
         } else if (key.compareTo(node.getKey()) < 0) {
             node.left = insert(node.left, key, value);
         } else {
@@ -244,7 +244,11 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
     @Override
     public boolean remove(K key) {
         if (!contains(key)) return false;
-        return remove(root, key) != null;
+        TreeNode<K, V> node = remove(root, key);
+        if (root.getKey().equals(key)) {
+            this.root = node;
+        }
+        return true;
     }
 
     private TreeNode<K, V> remove(TreeNode<K, V> node, K key) {
@@ -317,38 +321,28 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
         return this.size == 0;
     }
 
-    private class TreeNode<K, V> {
-        private K key;
-        private V value;
-        private TreeNode<K, V> left, right;
-
-        public TreeNode(K key, V value) {
-            this.key = key;
-            this.value = value;
-            left = right = null;
-        }
-
-        public TreeNode(TreeNode<K, V> node) {
-            this.key = node.key;
-            this.value = node.value;
-            this.left = node.left;
-            this.right = node.right;
-        }
-
-        public K getKey() {
-            return key;
-        }
-
-        public void setKey(K key) {
-            this.key = key;
-        }
-
-        public V getValue() {
-            return value;
-        }
-
-        public void setValue(V value) {
-            this.value = value;
+    public void prettyPrint() {
+        if (root == null) {
+            System.out.println("The tree is empty.");
+        } else {
+            printSubtree(root, "", true);
         }
     }
+
+    private void printSubtree(TreeNode<K, V> node, String prefix, boolean isLeft) {
+        if (node != null) {
+            // Print current node
+            System.out.println(prefix + (isLeft ? "├── " : "└── ") + node.getKey() + " : " + node.getValue());
+
+            // If there are children, print branches
+            if (node.left != null || node.right != null) {
+                // Print left subtree
+                printSubtree(node.left, prefix + (isLeft ? "│   " : "    "), true);
+                // Print right subtree
+                printSubtree(node.right, prefix + (isLeft ? "│   " : "    "), false);
+            }
+        }
+    }
+
+
 }

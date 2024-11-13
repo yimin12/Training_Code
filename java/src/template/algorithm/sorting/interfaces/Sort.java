@@ -2,7 +2,7 @@ package src.template.algorithm.sorting.interfaces;
 
 public abstract class Sort<T extends Comparable<T>> {
 
-    abstract void sort(T[] comparables);
+    public abstract void sort(T[] comparables);
 
     public static void swap(Object[] array, int i, int j) {
         swap_temp_memory(array, i, j);

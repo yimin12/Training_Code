@@ -67,7 +67,7 @@ public class CountingSort extends Sort {
     }
 
     @Override
-    void sort(Comparable[] comparables) {
+    public void sort(Comparable[] comparables) {
         if (comparables == null || comparables.length == 0) return;
         Comparable min = comparables[0];
         Comparable max = comparables[0];
