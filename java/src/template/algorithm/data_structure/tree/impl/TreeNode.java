@@ -1,6 +1,7 @@
 package src.template.algorithm.data_structure.tree.impl;
 
 public class TreeNode<K, V> {
+
     private K key;
     private V value;
     TreeNode<K, V> left;

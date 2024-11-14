@@ -20,7 +20,12 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
     }
 
     public boolean insert(K key, V value) {
-        this.root = insert(root, key, value);
+        if (root == null) {
+            root = new TreeNode<>(key, value);
+            size++;
+            return true;
+        }
+        root = insert_iteratively(root, key, value);
         return true;
     }
 
@@ -31,7 +36,7 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
      * @param value
      * @return
      */
-    private TreeNode<K, V> insert(TreeNode<K, V> node, K key, V value) {
+    private TreeNode<K, V> insert_recursively(TreeNode<K, V> node, K key, V value) {
         if (node == null) {
             this.size ++;
             return new TreeNode<>(key, value);
@@ -39,11 +44,39 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
         if (key.compareTo(node.getKey()) == 0) {
             node.setValue(value);
         } else if (key.compareTo(node.getKey()) < 0) {
-            node.left = insert(node.left, key, value);
+            node.left = insert_recursively(node.left, key, value);
         } else {
-            node.right = insert(node.right, key, value);
+            node.right = insert_recursively(node.right, key, value);
         }
         return node;
+    }
+
+    private TreeNode<K, V> insert_iteratively(TreeNode<K, V> root, K key, V value) {
+        TreeNode<K, V> newNode = new TreeNode<>(key, value);
+        TreeNode<K, V> current = root;
+        TreeNode<K, V> parent = null;
+
+        while (current != null) {
+            parent = current;
+            int cmp = key.compareTo(current.getKey());
+            if (cmp == 0) {
+                current.setValue(value);
+                return root;
+            } else if (cmp < 0) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+        }
+
+        if (key.compareTo(parent.getKey()) < 0) {
+            parent.left = newNode;
+        } else {
+            parent.right = newNode;
+        }
+
+        size++;
+        return root;
     }
 
     @Override
@@ -77,17 +110,17 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
     }
 
     @Override
-    public List<TreeNode<K,V>> postOrder() {
-        List<TreeNode<K, V>> list = new ArrayList<>();
+    public List<K> postOrder() {
+        List<K> list = new ArrayList<>();
         postOrder_recursive(root, list);
         return list;
     }
 
-    private void postOrder_recursive(TreeNode<K, V> node, List<TreeNode<K, V>> list) {
+    private void postOrder_recursive(TreeNode<K, V> node, List<K> list) {
         if (node == null) return;
         postOrder_recursive(node.left, list);
         postOrder_recursive(node.right, list);
-        list.add(node);
+        list.add(node.getKey());
     }
 
     /**
@@ -158,14 +191,14 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
 
 
     @Override
-    public List<List<TreeNode<K, V>>> levelOrder() {
+    public List<List<K>> levelOrder() {
         if (root == null) return new ArrayList<>();
-        List<List<TreeNode<K, V>>> list = new ArrayList<>();
+        List<List<K>> list = new ArrayList<>();
         MyQueue<TreeNode<K, V>> queue = new Queue<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
             int size = queue.size();
-            List<TreeNode<K, V>> cur_list = new ArrayList<>();
+            List<K> cur_list = new ArrayList<>();
             for (int i = 0; i < size; i++) {
                 TreeNode<K, V> cur = queue.poll();
                 if (cur.left != null) {
@@ -174,7 +207,7 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
                 if (cur.right != null) {
                     queue.offer(cur.right);
                 }
-                cur_list.add(cur);
+                cur_list.add(cur.getKey());
             }
             list.add(cur_list);
         }
@@ -244,20 +277,20 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
     @Override
     public boolean remove(K key) {
         if (!contains(key)) return false;
-        TreeNode<K, V> node = remove(root, key);
+        TreeNode<K, V> node = remove_iterative(root, key);
         if (root.getKey().equals(key)) {
             this.root = node;
         }
         return true;
     }
 
-    private TreeNode<K, V> remove(TreeNode<K, V> node, K key) {
+    private TreeNode<K, V> remove_recursively(TreeNode<K, V> node, K key) {
         if (node == null) return null;
         if (key.compareTo(node.getKey()) < 0) {
-            node.left = remove(node.left, key);
+            node.left = remove_recursively(node.left, key);
             return node;
         } else if(key.compareTo(node.getKey()) > 0) {
-            node.right = remove(node.right, key);
+            node.right = remove_recursively(node.right, key);
             return node;
         } else {
             if (node.left == null) {
@@ -280,6 +313,53 @@ public class MyBinarySearchTree <K extends Comparable<K>, V> implements MySearch
         node.left = node.right = null;
         this.size --;
         return successor;
+    }
+
+    private TreeNode<K, V> remove_iterative(TreeNode<K, V> root, K key) {
+        TreeNode<K, V> parent = null;
+        TreeNode<K, V> current = root;
+
+        while (current != null && !current.getKey().equals(key)) {
+            parent = current;
+            if (key.compareTo(current.getKey()) < 0) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+        }
+
+        if (current == null) {
+            return root;
+        }
+
+        if (current.left != null && current.right != null) {
+            TreeNode<K, V> successor = current.right;
+            TreeNode<K, V> successorParent = current;
+
+            while (successor.left != null) {
+                successorParent = successor;
+                successor = successor.left;
+            }
+
+            current.setKey(successor.getKey());
+            current.setValue(successor.getValue());
+
+            current = successor;
+            parent = successorParent;
+        }
+
+        TreeNode<K, V> child = (current.left != null) ? current.left : current.right;
+
+        if (parent == null) {
+            root = child; // Set new root if we were removing the root
+        } else if (parent.left == current) {
+            parent.left = child;
+        } else {
+            parent.right = child;
+        }
+
+        size--;
+        return root;
     }
 
     public boolean contains(K key) {

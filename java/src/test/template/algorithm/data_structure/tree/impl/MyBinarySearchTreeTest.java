@@ -147,10 +147,10 @@ public class MyBinarySearchTreeTest {
         bst.insert(5, "Five");
         bst.insert(15, "Fifteen");
 
-        List<TreeNode<Integer, String>> postOrderList = bst.postOrder();
-        assertEquals("Five", postOrderList.get(0).getValue());
-        assertEquals("Fifteen", postOrderList.get(1).getValue());
-        assertEquals("Ten", postOrderList.get(2).getValue());
+        List<Integer> postOrderList = bst.postOrder();
+        assertEquals(Integer.valueOf(5), postOrderList.get(0));
+        assertEquals(Integer.valueOf(15), postOrderList.get(1));
+        assertEquals(Integer.valueOf(10), postOrderList.get(2));
     }
 
     @Test
@@ -159,10 +159,10 @@ public class MyBinarySearchTreeTest {
         bst.insert(5, "Five");
         bst.insert(15, "Fifteen");
 
-        List<List<TreeNode<Integer, String>>> levelOrderList = bst.levelOrder();
-        assertEquals("Ten", levelOrderList.get(0).get(0).getValue());
-        assertEquals("Five", levelOrderList.get(1).get(0).getValue());
-        assertEquals("Fifteen", levelOrderList.get(1).get(1).getValue());
+        List<List<Integer>> levelOrderList = bst.levelOrder();
+        assertEquals(Integer.valueOf(10), levelOrderList.get(0).get(0));
+        assertEquals(Integer.valueOf(5), levelOrderList.get(1).get(0));
+        assertEquals(Integer.valueOf(15), levelOrderList.get(1).get(1));
     }
 
     @Test
